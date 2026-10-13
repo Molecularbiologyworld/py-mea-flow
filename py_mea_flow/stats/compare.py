@@ -13,7 +13,7 @@ Four levels of analysis are provided:
 2. **Pairwise Tukey HSD** (:func:`tukey_hsd_pairwise`)
    Parametric all-pairs comparison using SciPy's studentised-range
    implementation.  Drives the significance brackets shown on
-   :func:`py_mea_axion.viz.comparison.plot_condition_violin`.
+   :func:`py_mea_flow.viz.comparison.plot_condition_violin`.
 
 3. **Intraclass correlation** (:func:`compute_icc`)
    ICC(2,k) for assessing electrode-to-electrode or well-to-well

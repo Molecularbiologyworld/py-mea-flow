@@ -32,7 +32,7 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 
-from py_mea_axion.burst.detection import Burst
+from py_mea_flow.burst.detection import Burst
 
 # ── NetworkBurst namedtuple ───────────────────────────────────────────────────
 
@@ -66,7 +66,7 @@ def detect_network_bursts(
     ----------
     well_burst_dict : dict[str, list of Burst]
         Mapping from electrode ID to its burst list, as returned by
-        :func:`~py_mea_axion.burst.detection.detect_bursts` for each
+        :func:`~py_mea_flow.burst.detection.detect_bursts` for each
         electrode.  Silent electrodes (empty burst lists) are included
         in the active-electrode count only if they appear in the dict
         *and* have at least one burst.
@@ -105,7 +105,7 @@ def detect_network_bursts(
 
     Examples
     --------
-    >>> from py_mea_axion.burst.detection import detect_bursts
+    >>> from py_mea_flow.burst.detection import detect_bursts
     >>> import numpy as np
     >>> spikes_a = np.array([0.01, 0.02, 0.03, 0.04, 0.05,
     ...                      5.01, 5.02, 5.03, 5.04, 5.05])
@@ -292,7 +292,7 @@ def detect_network_bursts_combined_isi(
 
     1. All electrode spike trains are concatenated and sorted into a single
        combined spike train.
-    2. :func:`~py_mea_axion.burst.detection.detect_bursts` (ISI-threshold) is
+    2. :func:`~py_mea_flow.burst.detection.detect_bursts` (ISI-threshold) is
        run on the combined train.  *min_spikes* and *max_isi_s* refer to the
        **combined** train.
     3. Each candidate is post-filtered: it is kept only if at least
@@ -324,7 +324,7 @@ def detect_network_bursts_combined_isi(
     list of NetworkBurst
         Detected network bursts sorted by ``start_time``.
     """
-    from py_mea_axion.burst.detection import detect_bursts
+    from py_mea_flow.burst.detection import detect_bursts
 
     electrodes = {eid: ts for eid, ts in well_spike_dict.items() if len(ts) > 0}
     n_electrodes = len(electrodes)

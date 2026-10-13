@@ -1,7 +1,7 @@
 """
 tests/test_synchrony.py
 ========================
-Tests for py_mea_axion.network.synchrony (STTC).
+Tests for py_mea_flow.network.synchrony (STTC).
 
 Key analytic properties of STTC that we verify:
   1. Identical trains   → STTC = 1.0
@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from py_mea_axion.network.synchrony import mean_sttc, sttc, sttc_matrix
+from py_mea_flow.network.synchrony import mean_sttc, sttc, sttc_matrix
 
 
 # ── sttc: basic properties ────────────────────────────────────────────────────
@@ -208,7 +208,7 @@ class TestRealDataSmoke:
         if not spk.exists():
             pytest.skip("Real .spk file not available")
 
-        from py_mea_axion.io.spk_reader import load_spikes_from_spk
+        from py_mea_flow.io.spk_reader import load_spikes_from_spk
         result, total = load_spikes_from_spk(spk, wells=["A1"])
 
         val = mean_sttc(result, dt_s=0.05, total_time_s=total, active_only=True)

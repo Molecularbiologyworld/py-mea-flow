@@ -4,7 +4,7 @@ network/metrics.py
 Well-level network burst metrics (Categories 3 and 5).
 
 Computes all NeuralMetric-equivalent network burst summary statistics from
-a list of :class:`~py_mea_axion.network.detection.NetworkBurst` objects and
+a list of :class:`~py_mea_flow.network.detection.NetworkBurst` objects and
 the raw per-electrode spike dictionaries.
 
 Public API
@@ -17,7 +17,7 @@ from typing import Any, Dict, List
 
 import numpy as np
 
-from py_mea_axion.network.detection import NetworkBurst
+from py_mea_flow.network.detection import NetworkBurst
 
 _NAN = float("nan")
 
@@ -36,7 +36,7 @@ def network_burst_metrics(
     ----------
     network_bursts : list of NetworkBurst
         Detected network bursts sorted by ``start_time``, as returned by
-        :func:`~py_mea_axion.network.detection.detect_network_bursts_combined_isi`.
+        :func:`~py_mea_flow.network.detection.detect_network_bursts_combined_isi`.
     well_spike_dict : dict[str, np.ndarray]
         Electrode ID → sorted spike timestamp array (s) for the well.
     total_time_s : float

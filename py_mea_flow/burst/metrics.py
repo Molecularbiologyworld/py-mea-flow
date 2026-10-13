@@ -24,7 +24,7 @@ from typing import Any, Dict, List, Optional
 import numpy as np
 import pandas as pd
 
-from py_mea_axion.burst.detection import Burst
+from py_mea_flow.burst.detection import Burst
 
 _NAN = float("nan")
 
@@ -53,7 +53,7 @@ def bursts_to_dataframe(
     ----------
     bursts : list of Burst
         Detected bursts for a single electrode, sorted by ``start_time``
-        (as returned by :func:`~py_mea_axion.burst.detection.detect_bursts`).
+        (as returned by :func:`~py_mea_flow.burst.detection.detect_bursts`).
     electrode_id : str
         Electrode label, e.g. ``'A1_11'``.
     well_id : str
@@ -84,7 +84,7 @@ def bursts_to_dataframe(
 
     Examples
     --------
-    >>> from py_mea_axion.burst.detection import detect_bursts
+    >>> from py_mea_flow.burst.detection import detect_bursts
     >>> import numpy as np
     >>> spikes = np.array([0.01, 0.02, 0.03, 0.04, 0.05,
     ...                    2.01, 2.02, 2.03, 2.04, 2.05])
@@ -146,7 +146,7 @@ def aggregate_well_bursts(
     ----------
     well_burst_dict : dict[str, list of Burst]
         Mapping from electrode ID to its burst list, e.g. as produced by
-        calling :func:`~py_mea_axion.burst.detection.detect_bursts` for
+        calling :func:`~py_mea_flow.burst.detection.detect_bursts` for
         every electrode in a well.
     well_id : str
         Well label written into every row.
@@ -162,7 +162,7 @@ def aggregate_well_bursts(
     Examples
     --------
     >>> import numpy as np
-    >>> from py_mea_axion.burst.detection import detect_bursts
+    >>> from py_mea_flow.burst.detection import detect_bursts
     >>> spikes = {"A1_11": detect_bursts(np.array([0.01,0.02,0.03,0.04,0.05])),
     ...           "A1_12": []}
     >>> df = aggregate_well_bursts(spikes, well_id="A1")

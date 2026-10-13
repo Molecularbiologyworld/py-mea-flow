@@ -20,7 +20,7 @@ from typing import Dict, List, Optional, Union
 
 import pandas as pd
 
-from py_mea_axion.io.spk_reader import build_well_list
+from py_mea_flow.io.spk_reader import build_well_list
 
 # Columns that every metadata table must contain.
 _REQUIRED_COLUMNS: List[str] = ["well_id", "condition", "DIV", "replicate_id"]

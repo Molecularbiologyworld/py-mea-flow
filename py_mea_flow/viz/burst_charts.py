@@ -22,7 +22,7 @@ import numpy as np
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
 
-from py_mea_axion.burst.detection import Burst
+from py_mea_flow.burst.detection import Burst
 
 
 def plot_isi_histogram(
@@ -144,7 +144,7 @@ def plot_burst_raster(
     well_spike_dict : dict[str, np.ndarray]
         Electrode ID → spike times (s).
     well_burst_dict : dict[str, list[Burst]]
-        Electrode ID → list of :class:`~py_mea_axion.burst.detection.Burst`.
+        Electrode ID → list of :class:`~py_mea_flow.burst.detection.Burst`.
         Electrodes absent from this dict are treated as having no bursts.
     t_start, t_stop : float, optional
         Time window to display (seconds).  *t_stop* defaults to the latest
@@ -174,7 +174,7 @@ def plot_burst_raster(
     Examples
     --------
     >>> import numpy as np
-    >>> from py_mea_axion.burst.detection import Burst
+    >>> from py_mea_flow.burst.detection import Burst
     >>> spikes = {"A1_11": np.array([0.1, 0.2, 0.3])}
     >>> bursts = {"A1_11": [Burst(0.1, 0.3, np.array([0.1,0.2,0.3]), 3, 0.2, 0.1)]}
     >>> fig = plot_burst_raster(spikes, bursts)

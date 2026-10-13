@@ -1,7 +1,7 @@
 """
 tests/test_burst_detection.py
 ==============================
-Tests for py_mea_axion.burst.detection.
+Tests for py_mea_flow.burst.detection.
 
 Manually constructed spike trains with known burst structure are used to
 verify ISI-threshold output exactly.  The trains are designed so that
@@ -34,7 +34,7 @@ TRAIN_BOUNDARY_ISI
 import numpy as np
 import pytest
 
-from py_mea_axion.burst.detection import Burst, detect_bursts
+from py_mea_flow.burst.detection import Burst, detect_bursts
 
 # ── Canonical test trains ─────────────────────────────────────────────────────
 
@@ -291,7 +291,7 @@ class TestRealDataSmoke:
         if not spk.exists():
             pytest.skip("Real .spk file not available")
 
-        from py_mea_axion.io.spk_reader import load_spikes_from_spk
+        from py_mea_flow.io.spk_reader import load_spikes_from_spk
         result, total = load_spikes_from_spk(spk, wells=["A1"])
 
         # Pick the most active electrode.

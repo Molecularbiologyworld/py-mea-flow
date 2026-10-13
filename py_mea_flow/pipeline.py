@@ -10,7 +10,7 @@ be fed directly into the stats and viz modules.
 
 Typical usage
 -------------
->>> from py_mea_axion.pipeline import MEAExperiment
+>>> from py_mea_flow.pipeline import MEAExperiment
 >>> exp = MEAExperiment("recording.spk", metadata="plate_map.csv")
 >>> exp.run()
 >>> exp.spike_metrics.head()
@@ -34,21 +34,21 @@ import numpy as np
 import pandas as pd
 from matplotlib.figure import Figure
 
-from py_mea_axion.burst.detection import Burst, detect_bursts
-from py_mea_axion.burst.metrics import aggregate_well_bursts, well_burst_metrics
-from py_mea_axion.network.detection import (
+from py_mea_flow.burst.detection import Burst, detect_bursts
+from py_mea_flow.burst.metrics import aggregate_well_bursts, well_burst_metrics
+from py_mea_flow.network.detection import (
     NetworkBurst,
     detect_network_bursts,
     detect_network_bursts_combined_isi,
 )
-from py_mea_axion.network.metrics import network_burst_metrics
-from py_mea_axion.network.synchrony import mean_sttc, sttc_matrix
-from py_mea_axion.spike.metrics import summarise_well
-from py_mea_axion.stats.compare import CompareResult, compare_conditions, longitudinal_model
-from py_mea_axion.viz.burst_charts import plot_burst_raster, plot_isi_histogram
-from py_mea_axion.viz.heatmap import plot_electrode_heatmap
-from py_mea_axion.viz.network_plots import plot_network_burst_timeline, plot_sttc_matrix
-from py_mea_axion.viz.trajectory import plot_metric_trajectory
+from py_mea_flow.network.metrics import network_burst_metrics
+from py_mea_flow.network.synchrony import mean_sttc, sttc_matrix
+from py_mea_flow.spike.metrics import summarise_well
+from py_mea_flow.stats.compare import CompareResult, compare_conditions, longitudinal_model
+from py_mea_flow.viz.burst_charts import plot_burst_raster, plot_isi_histogram
+from py_mea_flow.viz.heatmap import plot_electrode_heatmap
+from py_mea_flow.viz.network_plots import plot_network_burst_timeline, plot_sttc_matrix
+from py_mea_flow.viz.trajectory import plot_metric_trajectory
 
 log = logging.getLogger(__name__)
 
@@ -64,7 +64,7 @@ class MEAExperiment:
         Path to the Axion ``*.spk`` binary file.
     metadata : str, Path, or pd.DataFrame, optional
         Plate-map data.  Passed directly to
-        :func:`~py_mea_axion.io.metadata.load_metadata`.  When ``None``
+        :func:`~py_mea_flow.io.metadata.load_metadata`.  When ``None``
         the condition/DIV columns are absent from summary tables and
         statistical methods are unavailable.
     wells : list of str, optional
@@ -72,7 +72,7 @@ class MEAExperiment:
         all wells present in the file.
     fs_override : float, optional
         Force a specific sampling frequency (Hz).  Passed to
-        :func:`~py_mea_axion.io.spk_reader.load_spikes_from_spk`.
+        :func:`~py_mea_flow.io.spk_reader.load_spikes_from_spk`.
     time_start_s : float, optional
         Analysis-window start time in seconds.  Spikes earlier than this
         are discarded.  The retained spikes are shifted so that the
@@ -90,11 +90,11 @@ class MEAExperiment:
         Set to ``0`` to disable filtering.  Default 1.
     burst_kwargs : dict, optional
         Keyword arguments forwarded to
-        :func:`~py_mea_axion.burst.detection.detect_bursts` for every
+        :func:`~py_mea_flow.burst.detection.detect_bursts` for every
         electrode.  E.g. ``{'max_isi_s': 0.1, 'min_spikes': 5}``.
     network_kwargs : dict, optional
         Keyword arguments forwarded to
-        :func:`~py_mea_axion.network.detection.detect_network_bursts`
+        :func:`~py_mea_flow.network.detection.detect_network_bursts`
         for every well.
     sttc_dt_s : float, optional
         Coincidence window half-width (seconds) for STTC computation.
@@ -182,7 +182,7 @@ class MEAExperiment:
         ----------
         spikes_flat : dict[str, np.ndarray]
             Flat electrode-ID → spike-times mapping (e.g. as returned by
-            :func:`~py_mea_axion.io.spk_reader.load_spikes_from_spk`).
+            :func:`~py_mea_flow.io.spk_reader.load_spikes_from_spk`).
         total_time_s : float
             Recording duration in seconds.
         metadata : optional
@@ -279,7 +279,7 @@ class MEAExperiment:
         if self._preloaded_spikes_flat is not None:
             flat = self._preloaded_spikes_flat
         else:
-            from py_mea_axion.io.spk_reader import load_spikes_from_spk
+            from py_mea_flow.io.spk_reader import load_spikes_from_spk
             flat, self._total_time_s = load_spikes_from_spk(
                 self.spk_path,
                 wells=self._wells_filter,
@@ -319,7 +319,7 @@ class MEAExperiment:
         if isinstance(self._metadata_source, pd.DataFrame):
             self._metadata = self._metadata_source.copy()
         else:
-            from py_mea_axion.io.metadata import load_metadata
+            from py_mea_flow.io.metadata import load_metadata
             self._metadata = load_metadata(self._metadata_source)
         log.info("Metadata loaded: %d rows.", len(self._metadata))
 
@@ -391,7 +391,7 @@ class MEAExperiment:
         if all_burst_dfs:
             self._burst_table = pd.concat(all_burst_dfs, ignore_index=True)
         else:
-            from py_mea_axion.burst.metrics import BURST_COLUMNS
+            from py_mea_flow.burst.metrics import BURST_COLUMNS
             self._burst_table = pd.DataFrame(columns=BURST_COLUMNS)
 
     def _step_network_bursts(self) -> None:
@@ -670,7 +670,7 @@ class MEAExperiment:
     ) -> CompareResult:
         """Compare a well-level metric across experimental conditions.
 
-        Wraps :func:`~py_mea_axion.stats.compare.compare_conditions`
+        Wraps :func:`~py_mea_flow.stats.compare.compare_conditions`
         using :meth:`joined_summary` as the data source.
 
         Parameters
@@ -718,7 +718,7 @@ class MEAExperiment:
     ) -> pd.DataFrame:
         """Fit a longitudinal mixed-effects model.
 
-        Wraps :func:`~py_mea_axion.stats.compare.longitudinal_model`
+        Wraps :func:`~py_mea_flow.stats.compare.longitudinal_model`
         using :meth:`joined_summary` as the data source.
 
         Parameters
@@ -770,7 +770,7 @@ class MEAExperiment:
             Default ``'mfr_hz'``.
         **kwargs
             Forwarded to
-            :func:`~py_mea_axion.viz.heatmap.plot_electrode_heatmap`.
+            :func:`~py_mea_flow.viz.heatmap.plot_electrode_heatmap`.
 
         Returns
         -------
@@ -797,7 +797,7 @@ class MEAExperiment:
             Well to visualise.
         **kwargs
             Forwarded to
-            :func:`~py_mea_axion.viz.burst_charts.plot_burst_raster`.
+            :func:`~py_mea_flow.viz.burst_charts.plot_burst_raster`.
 
         Returns
         -------
@@ -827,7 +827,7 @@ class MEAExperiment:
             Electrode label (e.g. ``'A1_11'``).
         **kwargs
             Forwarded to
-            :func:`~py_mea_axion.viz.burst_charts.plot_isi_histogram`.
+            :func:`~py_mea_flow.viz.burst_charts.plot_isi_histogram`.
 
         Returns
         -------
@@ -865,7 +865,7 @@ class MEAExperiment:
             Column in :meth:`joined_summary` to plot.
         **kwargs
             Forwarded to
-            :func:`~py_mea_axion.viz.trajectory.plot_metric_trajectory`.
+            :func:`~py_mea_flow.viz.trajectory.plot_metric_trajectory`.
 
         Returns
         -------
@@ -893,7 +893,7 @@ class MEAExperiment:
             Well to visualise.
         **kwargs
             Forwarded to
-            :func:`~py_mea_axion.viz.network_plots.plot_sttc_matrix`.
+            :func:`~py_mea_flow.viz.network_plots.plot_sttc_matrix`.
 
         Returns
         -------
@@ -919,7 +919,7 @@ class MEAExperiment:
             Well to visualise.
         **kwargs
             Forwarded to
-            :func:`~py_mea_axion.viz.network_plots.plot_network_burst_timeline`.
+            :func:`~py_mea_flow.viz.network_plots.plot_network_burst_timeline`.
 
         Returns
         -------

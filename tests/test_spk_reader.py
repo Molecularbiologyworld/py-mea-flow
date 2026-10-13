@@ -1,7 +1,7 @@
 """
 tests/test_spk_reader.py
 ========================
-Tests for py_mea_axion.io.spk_reader.
+Tests for py_mea_flow.io.spk_reader.
 
 The synthetic .spk builder at the bottom of this file constructs a
 minimal but fully valid binary that exercises every code path in
@@ -64,7 +64,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from py_mea_axion.io.spk_reader import (
+from py_mea_flow.io.spk_reader import (
     CHANNELS_PER_WELL,
     PLATE_COLS,
     PLATE_ROWS,

@@ -1,7 +1,7 @@
 """
 tests/test_stats.py
 ====================
-Tests for py_mea_axion.stats.compare.
+Tests for py_mea_flow.stats.compare.
 
 Analytic ground-truth cases
 ----------------------------
@@ -25,7 +25,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from py_mea_axion.stats.compare import (
+from py_mea_flow.stats.compare import (
     CompareResult,
     _dunn_test,
     compare_conditions,
@@ -441,8 +441,8 @@ class TestTukeyHsdPairwise:
 
 class TestTukeyHsdImportableFromModule:
     def test_importable_from_stats_top_level(self):
-        # The function should be exposed at py_mea_axion.stats.tukey_hsd_pairwise.
-        from py_mea_axion.stats import tukey_hsd_pairwise as imported
+        # The function should be exposed at py_mea_flow.stats.tukey_hsd_pairwise.
+        from py_mea_flow.stats import tukey_hsd_pairwise as imported
         assert callable(imported)
 
 
@@ -533,5 +533,5 @@ class TestPairwiseTest:
 
 class TestPairwiseTestImportableFromModule:
     def test_importable_from_stats_top_level(self):
-        from py_mea_axion.stats import pairwise_test as imported
+        from py_mea_flow.stats import pairwise_test as imported
         assert callable(imported)
