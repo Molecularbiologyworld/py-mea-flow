@@ -563,6 +563,17 @@ def _add_plot_trajectory_parser(pp) -> None:
         help="Maximum value of the time column to include.  Default: no upper bound.",
     )
     p.add_argument(
+        "--xtick-step",
+        type=int,
+        default=1,
+        metavar="N",
+        help=(
+            "Show an x-axis tick every N integer time points.  Default: 1 "
+            "(every integer).  Use larger values (e.g. 5) for long DIV ranges "
+            "where tick labels overlap."
+        ),
+    )
+    p.add_argument(
         "--out", "-o",
         default="figures/trajectory",
         metavar="DIR",
@@ -1535,7 +1546,7 @@ def _cmd_plot_trajectory(args: argparse.Namespace) -> int:
     import matplotlib.pyplot as plt
     from py_mea_axion.viz.trajectory import plot_metric_trajectory
 
-    figsize = tuple(args.figsize) if getattr(args, "figsize", None) else (6.0, 4.0)
+    figsize = tuple(args.figsize) if getattr(args, "figsize", None) else (5.0, 5.0)
     for metric in metrics:
         try:
             fig = plot_metric_trajectory(
@@ -1544,6 +1555,7 @@ def _cmd_plot_trajectory(args: argparse.Namespace) -> int:
                 groups=groups, palette=palette,
                 figsize=figsize,
                 ylabel=_label_for(metric),
+                xtick_step=getattr(args, "xtick_step", 1),
             )
         except Exception as exc:  # noqa: BLE001
             log.warning("Trajectory failed for %s: %s", metric, exc)

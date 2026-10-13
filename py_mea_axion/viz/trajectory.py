@@ -52,6 +52,7 @@ def plot_metric_trajectory(
     xlabel: Optional[str] = None,
     ylabel: Optional[str] = None,
     title: Optional[str] = None,
+    xtick_step: int = 1,
     ax: Optional[Axes] = None,
 ) -> Figure:
     """Plot a longitudinal trajectory of a per-well metric.
@@ -203,7 +204,14 @@ def plot_metric_trajectory(
         if all_int:
             lo = int(round(min(time_points)))
             hi = int(round(max(time_points)))
-            ax.set_xticks(list(range(lo, hi + 1)))
+            step = max(1, int(xtick_step))
+            if step == 1:
+                ticks = list(range(lo, hi + 1))
+            else:
+                start = ((lo + step - 1) // step) * step
+                end = (hi // step) * step
+                ticks = list(range(start, end + 1, step))
+            ax.set_xticks(ticks)
             ax.set_xlim(lo - 0.5, hi + 0.5)
         else:
             ax.set_xticks(time_points)
