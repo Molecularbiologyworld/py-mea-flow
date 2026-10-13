@@ -57,7 +57,7 @@ def build_parser() -> argparse.ArgumentParser:
     """Build and return the top-level argument parser."""
     parser = argparse.ArgumentParser(
         prog="mea-flow",
-        description="End-to-end MEA analysis for Axion Biosystems recordings.",
+        description="End-to-end multi-electrode array (MEA) analysis for .spk recordings.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
@@ -84,7 +84,7 @@ def _common_args(p: argparse.ArgumentParser) -> None:
     p.add_argument(
         "spk_file",
         metavar="SPK_FILE",
-        help="Path to the Axion *.spk recording file.",
+        help="Path to the *.spk recording file.",
     )
     p.add_argument(
         "--wells", "-w",

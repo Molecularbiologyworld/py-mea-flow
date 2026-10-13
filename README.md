@@ -6,7 +6,7 @@
 
 Welcome to our MEA Python package!
 
-End-to-end analysis of multi-electrode array (MEA) recordings from **Axion Biosystems** instruments, in Python.
+End-to-end analysis of multi-electrode array (MEA) recordings stored as `.spk` files, in Python.
 
 `py-mea-flow` reads raw `.spk` binary files and carries the analysis through spike metrics, burst detection, network-burst detection, and synchrony measurement, all the way to statistical comparisons and publication-ready figures, **driven entirely from the command line**.
 
@@ -269,7 +269,7 @@ from py_mea_flow.stats import (
 
 ---
 
-## Note on Axion `.spk` files
+## Note on `.spk` files
 
 Some recordings lack a `BlockVectorHeader` (firmware-dependent). When that happens, sampling-rate detection may guess wrong; pass `--fs-override` explicitly:
 
@@ -277,7 +277,7 @@ Some recordings lack a `BlockVectorHeader` (firmware-dependent). When that happe
 mea-flow run recording.spk --fs-override 12500
 ```
 
-12500 Hz is the standard rate for Axion CytoView 24-well plates.
+12500 Hz is the standard rate for 24-well plates.
 
 ---
 

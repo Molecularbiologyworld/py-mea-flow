@@ -1,9 +1,9 @@
 """
 spk_reader.py
 =============
-Parser for Axion BioSystems .spk binary files.
+Parser for .spk binary spike files.
 
-Binary format reverse-engineered from the Axion AxIS MATLAB source
+Binary format reverse-engineered from the AxIS MATLAB file readers
 (AxisFile.m, BlockVectorData.m, ChannelArray.m, ChannelMapping.m,
 DateTime.m).  All parsing logic is preserved exactly from the
 original ``mea_raster_generator.py`` implementation.
@@ -28,7 +28,7 @@ import numpy as np
 
 log = logging.getLogger(__name__)
 
-# ── Plate geometry (Axion 24-well CytoView MEA) ──────────────────────────────
+# ── Plate geometry (24-well MEA plate) ───────────────────────────────────────
 
 PLATE_ROWS: str = "ABCD"          # row labels, top to bottom
 PLATE_COLS: int = 6               # column count
@@ -37,7 +37,7 @@ TOTAL_CHANNELS: int = (           # 384 total
     len(PLATE_ROWS) * PLATE_COLS * CHANNELS_PER_WELL
 )
 
-# Axion 4×4 electrode grid: rows 1-4, columns 1-4, 16 electrodes per well.
+# 4×4 electrode grid: rows 1-4, columns 1-4, 16 electrodes per well.
 ELECTRODES_PER_ROW: int = 4
 ELECTRODES_PER_COL: int = 4
 
@@ -95,8 +95,8 @@ def electrode_id(
     Returns
     -------
     str
-        Electrode ID following the Axion convention used by AxIS Navigator
-        and NeuralMetric Tool: well, then the electrode's column and row
+        Electrode ID following the convention used by AxIS Navigator and
+        NeuralMetric Tool: well, then the electrode's column and row
         digits, e.g. ``'A1_14'`` is column 1, row 4 of well A1.
     """
     return f"{PLATE_ROWS[well_row - 1]}{well_col}_{elec_col}{elec_row}"
@@ -280,7 +280,7 @@ def load_spikes_from_spk(
     wells: Optional[List[str]] = None,
     fs_override: Optional[float] = None,
 ) -> Tuple[Dict[str, np.ndarray], float]:
-    """Parse an Axion .spk file and return per-electrode spike timestamps.
+    """Parse a .spk file and return per-electrode spike timestamps.
 
     Uses the exact binary format specified in AxisFile.m,
     BlockVectorData.m, ChannelArray.m, ChannelMapping.m, and DateTime.m.
@@ -312,7 +312,7 @@ def load_spikes_from_spk(
     Raises
     ------
     ValueError
-        If the file is not a valid Axion file, uses an unsupported format
+        If the file is not a valid .spk file, uses an unsupported format
         version, or if no spike data can be found.
     """
     spk_path = Path(spk_path)
@@ -322,7 +322,7 @@ def load_spikes_from_spk(
     # ── 1. Validate magic ─────────────────────────────────────────────────────
     if raw[:8] != _MAGIC:
         raise ValueError(
-            f"Not an Axion file (missing 'AxionBio' header): {spk_path.name}"
+            f"Not a .spk file (missing 'AxionBio' header): {spk_path.name}"
         )
 
     # ── 2. Parse primary file header ──────────────────────────────────────────
@@ -569,7 +569,7 @@ def load_spikes_from_spk(
                 buckets[eid] = list(spike_ts[mask])
 
     # Convert lists → sorted NumPy arrays, clipping to the analysis window
-    # [0, total_time_s].  Axion recordings occasionally contain spike timestamps
+    # [0, total_time_s].  Recordings occasionally contain spike timestamps
     # slightly before t=0 (pre-recording buffer artefact).  NeuralMetric Tools
     # applies the same clip via its "Analysis Start / End" settings.
     result: Dict[str, np.ndarray] = {}

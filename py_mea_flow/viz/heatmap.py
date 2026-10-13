@@ -3,7 +3,7 @@ viz/heatmap.py
 ==============
 Spatial electrode activity heatmap for a single well.
 
-Plots the 4×4 electrode grid of an Axion CytoView well coloured by any
+Plots the 4×4 electrode grid of a well coloured by any
 pre-computed per-electrode metric (MFR, burst rate, CV(ISI), etc.).
 
 Public API
@@ -39,7 +39,7 @@ def plot_electrode_heatmap(
 ) -> Figure:
     """Plot a spatial heatmap of per-electrode metric values for one well.
 
-    The Axion 4×4 electrode grid is displayed with row 1 at the top and
+    The 4×4 electrode grid is displayed with row 1 at the top and
     column 1 at the left, matching the AxIS Navigator layout.  Electrodes
     absent from *values* (e.g. grounding electrodes) are rendered in
     *silent_color*.
@@ -162,7 +162,7 @@ def plot_electrode_heatmap(
 def _parse_electrode_rc(electrode_id: str) -> Tuple[Optional[int], Optional[int]]:
     """Extract (elec_row, elec_col) from an electrode ID like ``'A1_23'``.
 
-    Axion IDs give the column digit first, so ``'A1_23'`` is row 3,
+    Electrode IDs give the column digit first, so ``'A1_23'`` is row 3,
     column 2.  Returns ``(None, None)`` if the ID cannot be parsed.
     """
     try:

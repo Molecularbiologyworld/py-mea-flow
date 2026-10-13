@@ -56,12 +56,12 @@ log = logging.getLogger(__name__)
 # ── MEAExperiment ─────────────────────────────────────────────────────────────
 
 class MEAExperiment:
-    """End-to-end MEA analysis pipeline for a single Axion .spk recording.
+    """End-to-end MEA analysis pipeline for a single .spk recording.
 
     Parameters
     ----------
     spk_path : str or Path
-        Path to the Axion ``*.spk`` binary file.
+        Path to the ``*.spk`` binary file.
     metadata : str, Path, or pd.DataFrame, optional
         Plate-map data.  Passed directly to
         :func:`~py_mea_flow.io.metadata.load_metadata`.  When ``None``

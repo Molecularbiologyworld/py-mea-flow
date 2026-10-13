@@ -205,7 +205,7 @@ class TestHelpers:
     def test_electrode_id_format(self):
         assert electrode_id(1, 1, 1, 1) == "A1_11"
         assert electrode_id(4, 6, 4, 4) == "D6_44"
-        # Axion IDs put the electrode column before the row.
+        # Electrode IDs put the column before the row.
         assert electrode_id(2, 3, elec_row=1, elec_col=4) == "B3_41"
         assert electrode_id(1, 1, elec_row=4, elec_col=1) == "A1_14"
 
@@ -273,7 +273,7 @@ class TestSyntheticSpkRoundTrip:
         assert "A1_11" in result_all
         np.testing.assert_array_equal(result_all["A1_11"], result_a1["A1_11"])
 
-    def test_off_diagonal_electrode_id_matches_axion(self, tmp_path: Path):
+    def test_off_diagonal_electrode_id_is_column_first(self, tmp_path: Path):
         # ChannelArray stores ElectrodeColumn before ElectrodeRow; AxIS and
         # NeuralMetric Tool name this electrode (column 1, row 4) "A1_14".
         data = build_synthetic_spk(

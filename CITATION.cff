@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
-title: "py-mea-flow: end-to-end MEA data analysis for Axion Biosystems instruments"
-version: 0.5.1
+title: "py-mea-flow: end-to-end multi-electrode array analysis for .spk files"
+version: 0.5.2
 date-released: 2026-10-13
 license: MIT
 repository-code: "https://github.com/Molecularbiologyworld/py-mea-flow"
@@ -10,8 +10,8 @@ doi: "10.5281/zenodo.19350374"
 url: "https://doi.org/10.5281/zenodo.19350374"
 abstract: >
   py-mea-flow is an open-source Python package for end-to-end analysis
-  of multi-electrode array (MEA) recordings from Axion Biosystems
-  instruments. It provides direct parsing of raw .spk binary files,
+  of multi-electrode array (MEA) recordings stored as .spk files. It
+  provides direct parsing of raw .spk binary files,
   spike and burst metrics, network burst detection, spike-train
   synchrony (STTC), statistical comparison tools, and publication-ready
   visualisations — all accessible through a high-level Python API and
@@ -24,7 +24,6 @@ keywords:
   - burst detection
   - neural networks
   - neuroscience
-  - Axion Biosystems
 authors:
   - family-names: "Han"
     given-names: "Zhuang Z."

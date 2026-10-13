@@ -3,7 +3,7 @@ viz/plate.py
 ============
 Whole-plate well-grid heatmaps.
 
-Plots a 4×6 (Axion CytoView 24-well) or arbitrarily-shaped grid of wells
+Plots a 4×6 (24-well) or arbitrarily-shaped grid of wells
 coloured by a per-well metric value, with one panel per plate.
 
 Public API
