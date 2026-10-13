@@ -6,8 +6,6 @@
 
 Welcome to our MEA Python package!
 
-> **Renamed:** this package was called `py-mea-axion` up to version 0.4.0. Install `py-mea-flow`, import `py_mea_flow`, and run the `mea-flow` command.
-
 End-to-end analysis of multi-electrode array (MEA) recordings from **Axion Biosystems** instruments, in Python.
 
 `py-mea-flow` reads raw `.spk` binary files and carries the analysis through spike metrics, burst detection, network-burst detection, and synchrony measurement, all the way to statistical comparisons and publication-ready figures, **driven entirely from the command line**.
