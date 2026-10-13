@@ -1,7 +1,7 @@
 # py-mea-flow
 
-[![PyPI version](https://img.shields.io/pypi/v/py-mea-flow.svg)](https://pypi.org/project/py-mea-flow/)
-[![Python](https://img.shields.io/pypi/pyversions/py-mea-flow.svg)](https://pypi.org/project/py-mea-flow/)
+[![PyPI version](https://img.shields.io/pypi/v/py-mea-flow?label=PyPI)](https://pypi.org/project/py-mea-flow/)
+[![Python](https://img.shields.io/pypi/pyversions/py-mea-flow?label=Python)](https://pypi.org/project/py-mea-flow/)
 [![GitHub](https://img.shields.io/badge/GitHub-py--mea--flow-blue?logo=github)](https://github.com/Molecularbiologyworld/py-mea-flow)
 
 Welcome to our MEA Python package!
