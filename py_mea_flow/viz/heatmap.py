@@ -162,12 +162,13 @@ def plot_electrode_heatmap(
 def _parse_electrode_rc(electrode_id: str) -> Tuple[Optional[int], Optional[int]]:
     """Extract (elec_row, elec_col) from an electrode ID like ``'A1_23'``.
 
-    Returns ``(None, None)`` if the ID cannot be parsed.
+    Axion IDs give the column digit first, so ``'A1_23'`` is row 3,
+    column 2.  Returns ``(None, None)`` if the ID cannot be parsed.
     """
     try:
         suffix = electrode_id.split("_")[1]  # e.g. "23"
-        er = int(suffix[0])
-        ec = int(suffix[1])
+        ec = int(suffix[0])
+        er = int(suffix[1])
         return er, ec
     except (IndexError, ValueError):
         return None, None

@@ -205,7 +205,9 @@ class TestHelpers:
     def test_electrode_id_format(self):
         assert electrode_id(1, 1, 1, 1) == "A1_11"
         assert electrode_id(4, 6, 4, 4) == "D6_44"
-        assert electrode_id(2, 3, 1, 4) == "B3_14"
+        # Axion IDs put the electrode column before the row.
+        assert electrode_id(2, 3, elec_row=1, elec_col=4) == "B3_41"
+        assert electrode_id(1, 1, elec_row=4, elec_col=1) == "A1_14"
 
     def test_plate_constants(self):
         assert len(PLATE_ROWS) == 4
@@ -270,6 +272,19 @@ class TestSyntheticSpkRoundTrip:
         result_a1, _ = load_spikes_from_spk(spk_file, wells=["A1"])
         assert "A1_11" in result_all
         np.testing.assert_array_equal(result_all["A1_11"], result_a1["A1_11"])
+
+    def test_off_diagonal_electrode_id_matches_axion(self, tmp_path: Path):
+        # ChannelArray stores ElectrodeColumn before ElectrodeRow; AxIS and
+        # NeuralMetric Tool name this electrode (column 1, row 4) "A1_14".
+        data = build_synthetic_spk(
+            spike_samples=self.SPIKE_SAMPLES, elec_row=4, elec_col=1,
+        )
+        p = tmp_path / "off_diagonal.spk"
+        p.write_bytes(data)
+        result, _ = load_spikes_from_spk(p)
+        assert "A1_14" in result
+        assert "A1_41" not in result
+        assert len(result["A1_14"]) == 2
 
 
 class TestSyntheticSpkTriggerOffset:

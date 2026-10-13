@@ -95,10 +95,11 @@ def electrode_id(
     Returns
     -------
     str
-        Electrode ID following Axion convention, e.g. ``'A1_11'``,
-        ``'A1_44'``, ``'D6_23'``.
+        Electrode ID following the Axion convention used by AxIS Navigator
+        and NeuralMetric Tool: well, then the electrode's column and row
+        digits, e.g. ``'A1_14'`` is column 1, row 4 of well A1.
     """
-    return f"{PLATE_ROWS[well_row - 1]}{well_col}_{elec_row}{elec_col}"
+    return f"{PLATE_ROWS[well_row - 1]}{well_col}_{elec_col}{elec_row}"
 
 
 def well_channels_1based(well: str) -> List[int]:
@@ -558,8 +559,9 @@ def load_spikes_from_spk(
             wi = all_wells.index(w)
             for en in range(1, CHANNELS_PER_WELL + 1):
                 global_ch = wi * CHANNELS_PER_WELL + en
-                er_fb = (en - 1) // ELECTRODES_PER_ROW + 1
-                ec_fb = (en - 1) % ELECTRODES_PER_COL + 1
+                # Channels 1-16 map to A1_11, A1_12, ... A1_44 in ID order.
+                ec_fb = (en - 1) // ELECTRODES_PER_ROW + 1
+                er_fb = (en - 1) % ELECTRODES_PER_COL + 1
                 wr_fb = all_wells.index(w) // PLATE_COLS + 1
                 wc_fb = all_wells.index(w) % PLATE_COLS + 1
                 eid = electrode_id(wr_fb, wc_fb, er_fb, ec_fb)
@@ -601,8 +603,8 @@ def load_spikes_from_spk(
             wr_fb = wi // PLATE_COLS + 1
             wc_fb = wi % PLATE_COLS + 1
             for en in range(1, CHANNELS_PER_WELL + 1):
-                er_fb = (en - 1) // ELECTRODES_PER_ROW + 1
-                ec_fb = (en - 1) % ELECTRODES_PER_COL + 1
+                ec_fb = (en - 1) // ELECTRODES_PER_ROW + 1
+                er_fb = (en - 1) % ELECTRODES_PER_COL + 1
                 eid = electrode_id(wr_fb, wc_fb, er_fb, ec_fb)
                 result.setdefault(eid, np.array([], dtype=np.float64))
 

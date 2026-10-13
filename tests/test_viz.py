@@ -156,7 +156,8 @@ def pca_df():
 
 class TestParseElectrodeRc:
     def test_valid_id(self):
-        assert _parse_electrode_rc("A1_23") == (2, 3)
+        # Column digit first: A1_23 is row 3, column 2.
+        assert _parse_electrode_rc("A1_23") == (3, 2)
 
     def test_valid_id_first(self):
         assert _parse_electrode_rc("B3_11") == (1, 1)
