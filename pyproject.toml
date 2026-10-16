@@ -3,8 +3,8 @@ requires = ["setuptools>=68,<77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "py-mea-flow"
-version = "0.5.2"
+name = "py-mea-span"
+version = "0.6.0"
 description = "End-to-end multi-electrode array (MEA) analysis for .spk files"
 readme = "README.md"
 license = { text = "MIT" }
@@ -31,9 +31,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Molecularbiologyworld/py-mea-flow"
-Repository = "https://github.com/Molecularbiologyworld/py-mea-flow"
-Issues = "https://github.com/Molecularbiologyworld/py-mea-flow/issues"
+Homepage = "https://github.com/Molecularbiologyworld/py-mea-span"
+Repository = "https://github.com/Molecularbiologyworld/py-mea-span"
+Issues = "https://github.com/Molecularbiologyworld/py-mea-span/issues"
 
 [project.optional-dependencies]
 interactive = ["plotly>=5.18"]
@@ -41,11 +41,11 @@ dev = ["pytest>=7.4", "pytest-cov>=4.1"]
 docs = ["sphinx>=7.2", "nbsphinx>=0.9"]
 
 [project.scripts]
-mea-flow = "py_mea_flow.cli:main"
+mea-span = "py_mea_span.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["py_mea_flow*"]
+include = ["py_mea_span*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

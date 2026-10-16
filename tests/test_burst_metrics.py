@@ -1,7 +1,7 @@
 """
 tests/test_burst_metrics.py
 ============================
-Tests for py_mea_flow.burst.metrics.
+Tests for py_mea_span.burst.metrics.
 """
 
 import math
@@ -10,8 +10,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from py_mea_flow.burst.detection import Burst, detect_bursts
-from py_mea_flow.burst.metrics import (
+from py_mea_span.burst.detection import Burst, detect_bursts
+from py_mea_span.burst.metrics import (
     BURST_COLUMNS,
     aggregate_well_bursts,
     bursts_to_dataframe,
@@ -218,7 +218,7 @@ class TestRealDataSmoke:
         if not spk.exists():
             pytest.skip("Real .spk file not available")
 
-        from py_mea_flow.io.spk_reader import load_spikes_from_spk
+        from py_mea_span.io.spk_reader import load_spikes_from_spk
         result, total = load_spikes_from_spk(spk, wells=["B1"])
 
         well_bursts = {

@@ -1,7 +1,7 @@
 """
 tests/test_pipeline.py
 =======================
-Tests for py_mea_flow.pipeline.MEAExperiment.
+Tests for py_mea_span.pipeline.MEAExperiment.
 
 All tests use MEAExperiment.from_spikes() so no .spk file is required.
 Two synthetic datasets cover the main scenarios:
@@ -20,7 +20,7 @@ import pandas as pd
 import pytest
 from matplotlib.figure import Figure
 
-from py_mea_flow.pipeline import MEAExperiment, _group_by_well
+from py_mea_span.pipeline import MEAExperiment, _group_by_well
 
 
 # ── Shared fixtures ────────────────────────────────────────────────────────────
@@ -314,7 +314,7 @@ class TestJoinedSummary:
 
 class TestCompare:
     def test_returns_compare_result(self, multi_exp):
-        from py_mea_flow.stats.compare import CompareResult
+        from py_mea_span.stats.compare import CompareResult
         res = multi_exp.compare("mean_mfr_active_hz")
         assert isinstance(res, CompareResult)
 

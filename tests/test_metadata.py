@@ -1,7 +1,7 @@
 """
 tests/test_metadata.py
 ======================
-Tests for py_mea_flow.io.metadata.
+Tests for py_mea_span.io.metadata.
 """
 
 import textwrap
@@ -10,7 +10,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from py_mea_flow.io.metadata import load_metadata
+from py_mea_span.io.metadata import load_metadata
 
 # ── Fixtures ──────────────────────────────────────────────────────────────────
 

@@ -283,7 +283,7 @@ def _draw_pairwise_brackets(
     """Run a pairwise statistical test and overlay significance brackets.
 
     Statistical computation is delegated to
-    :func:`py_mea_flow.stats.pairwise_test`; this function only handles
+    :func:`py_mea_span.stats.pairwise_test`; this function only handles
     the geometry of drawing brackets above the violins.
 
     Parameters
@@ -304,7 +304,7 @@ def _draw_pairwise_brackets(
     least 2 observations or when the requested pair references unknown
     groups.
     """
-    from py_mea_flow.stats.compare import pairwise_test
+    from py_mea_span.stats.compare import pairwise_test
 
     # Build a small long-form frame for the stats helper.
     rows = []

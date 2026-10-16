@@ -1,6 +1,6 @@
 """Statistical comparison tools."""
 
-from py_mea_flow.stats.compare import (
+from py_mea_span.stats.compare import (
     CompareResult,
     compare_conditions,
     compute_icc,

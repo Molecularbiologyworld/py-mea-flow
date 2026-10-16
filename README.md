@@ -1,14 +1,14 @@
-# py-mea-flow
+# py-mea-span
 
-[![PyPI version](https://img.shields.io/pypi/v/py-mea-flow?label=PyPI)](https://pypi.org/project/py-mea-flow/)
-[![Python](https://img.shields.io/pypi/pyversions/py-mea-flow?label=Python)](https://pypi.org/project/py-mea-flow/)
-[![GitHub](https://img.shields.io/badge/GitHub-py--mea--flow-blue?logo=github)](https://github.com/Molecularbiologyworld/py-mea-flow)
+[![PyPI version](https://img.shields.io/pypi/v/py-mea-span?label=PyPI)](https://pypi.org/project/py-mea-span/)
+[![Python](https://img.shields.io/pypi/pyversions/py-mea-span?label=Python)](https://pypi.org/project/py-mea-span/)
+[![GitHub](https://img.shields.io/badge/GitHub-py--mea--span-blue?logo=github)](https://github.com/Molecularbiologyworld/py-mea-span)
 
 Welcome to our MEA Python package!
 
 End-to-end analysis of multi-electrode array (MEA) recordings stored as `.spk` files, in Python.
 
-`py-mea-flow` reads raw `.spk` binary files and carries the analysis through spike metrics, burst detection, network-burst detection, and synchrony measurement, all the way to statistical comparisons and publication-ready figures, **driven entirely from the command line**.
+`py-mea-span` reads raw `.spk` binary files and carries the analysis through spike metrics, burst detection, network-burst detection, and synchrony measurement, all the way to statistical comparisons and publication-ready figures, **driven entirely from the command line**.
 
 ---
 
@@ -17,21 +17,21 @@ End-to-end analysis of multi-electrode array (MEA) recordings stored as `.spk` f
 ```bash
 conda create -n mea python=3.11
 conda activate mea
-pip install py-mea-flow
+pip install py-mea-span
 ```
 
 For development against a local clone:
 
 ```bash
-git clone https://github.com/Molecularbiologyworld/py-mea-flow.git
-cd py-mea-flow
+git clone https://github.com/Molecularbiologyworld/py-mea-span.git
+cd py-mea-span
 pip install -e .
 ```
 
 To install the latest commit on `master` directly from GitHub:
 
 ```bash
-pip install git+https://github.com/Molecularbiologyworld/py-mea-flow.git
+pip install git+https://github.com/Molecularbiologyworld/py-mea-span.git
 ```
 
 **Requirements:** Python ≥ 3.10, numpy, scipy, pandas, matplotlib, pingouin, statsmodels.
@@ -42,12 +42,12 @@ pip install git+https://github.com/Molecularbiologyworld/py-mea-flow.git
 
 The CLI is organised around four phases:
 
-1. `mea-flow build` processes a folder of `.spk` files into a single labelled master CSV.
-2. `mea-flow plot <subcommand>` generates figures from the master CSV.
-3. `mea-flow stats` writes a long-format CSV of pairwise condition-comparison results, using the same statistical dispatcher that drives the violin brackets.
-4. `mea-flow show-layout` prints the well-to-condition map encoded in any master CSV.
+1. `mea-span build` processes a folder of `.spk` files into a single labelled master CSV.
+2. `mea-span plot <subcommand>` generates figures from the master CSV.
+3. `mea-span stats` writes a long-format CSV of pairwise condition-comparison results, using the same statistical dispatcher that drives the violin brackets.
+4. `mea-span show-layout` prints the well-to-condition map encoded in any master CSV.
 
-There are also `mea-flow run` (single recording, CSVs and figures) and `mea-flow summary` (single recording, stdout table) for one-off analyses.
+There are also `mea-span run` (single recording, CSVs and figures) and `mea-span summary` (single recording, stdout table) for one-off analyses.
 
 ---
 
@@ -74,7 +74,7 @@ Detection regex (case-insensitive): `Plate(\d+)_DIV(\d+)`. Anything before or af
 You specify the well-to-condition layout once, on the command line:
 
 ```bash
-mea-flow build "data/" --fs-override 12500 \
+mea-span build "data/" --fs-override 12500 \
   --well 1_A1=SCRM,B1,T1,Batch1 \
   --well 1_A2=KD,B1,T1,Batch1 \
   --well 1_B1=SCRM,B1,T2,Batch1 \
@@ -100,10 +100,10 @@ Three ways to avoid retyping the layout for a follow-up build:
 bash master.build.sh
 
 # Option 2: pull the layout from an existing master CSV.
-mea-flow build "data_v2/" --fs-override 12500 --layout-from master.csv --out master_v2.csv
+mea-span build "data_v2/" --fs-override 12500 --layout-from master.csv --out master_v2.csv
 
 # Option 3: print the equivalent --well flags to stdout.
-mea-flow show-layout master.csv
+mea-span show-layout master.csv
 ```
 
 ---
@@ -111,11 +111,11 @@ mea-flow show-layout master.csv
 ## Plot subcommands
 
 ```bash
-mea-flow plot heatmap     master.csv --metric mean_mfr_active_hz --div 21 --out figs/
-mea-flow plot trajectory  master.csv --metric mean_mfr_active_hz --out figs/
-mea-flow plot timepoint   master.csv --metric mean_mfr_active_hz --div 21 26 33 --out figs/
-mea-flow plot pca         master.csv --out figs/
-mea-flow plot raster      "recording.spk" --fs-override 12500 --wells A1 --out figs/
+mea-span plot heatmap     master.csv --metric mean_mfr_active_hz --div 21 --out figs/
+mea-span plot trajectory  master.csv --metric mean_mfr_active_hz --out figs/
+mea-span plot timepoint   master.csv --metric mean_mfr_active_hz --div 21 26 33 --out figs/
+mea-span plot pca         master.csv --out figs/
+mea-span plot raster      "recording.spk" --fs-override 12500 --wells A1 --out figs/
 ```
 
 | Subcommand | Input | What it produces |
@@ -169,12 +169,12 @@ mea-flow plot raster      "recording.spk" --fs-override 12500 --wells A1 --out f
 | `--top N` | Number of top features to show in the loadings figure. Default 10. |
 | `--point-shape COL --point-shape-map VALUE=MARKER` | Same as for `timepoint`, useful for indicating biological replicates by marker shape. |
 
-Run `mea-flow plot <subcommand> --help` for the full per-subcommand option list.
+Run `mea-span plot <subcommand> --help` for the full per-subcommand option list.
 
 ### Example: a complete violin command
 
 ```bash
-mea-flow plot timepoint master.csv \
+mea-span plot timepoint master.csv \
   --metric mean_mfr_active_hz burst_freq_avg network_burst_freq mean_sttc \
   --div 21 26 33 \
   --group-order SCRM LGI2_KD4 LGI2_KD5 \
@@ -192,12 +192,12 @@ Axis labels and colour-bar titles render human-readable names (`Mean firing rate
 
 ---
 
-## Statistical analyses (`mea-flow stats`)
+## Statistical analyses (`mea-span stats`)
 
-Beyond the brackets shown on violin plots, `mea-flow stats` writes a long-format CSV of pairwise condition-comparison results. Same data, same dispatcher as the violin brackets, just persisted as a tidy table for supplementary materials.
+Beyond the brackets shown on violin plots, `mea-span stats` writes a long-format CSV of pairwise condition-comparison results. Same data, same dispatcher as the violin brackets, just persisted as a tidy table for supplementary materials.
 
 ```bash
-mea-flow stats master.csv \
+mea-span stats master.csv \
   --metric mean_mfr_active_hz burst_freq_avg network_burst_freq mean_sttc \
   --div 28 41 \
   --compare LGI2_KD4 SCRM --compare LGI2_KD5 SCRM \
@@ -218,16 +218,16 @@ For ad-hoc inspection of one `.spk` file without going through `build`:
 
 ```bash
 # Quick per-well summary printed to the terminal (no files written)
-mea-flow summary recording.spk --fs-override 12500
+mea-span summary recording.spk --fs-override 12500
 
 # Full pipeline: writes CSVs and figures to results/
-mea-flow run recording.spk --out results/ --fs-override 12500
+mea-span run recording.spk --out results/ --fs-override 12500
 
 # Restrict to specific wells
-mea-flow summary recording.spk --wells A1 B1 C1 --fs-override 12500
+mea-span summary recording.spk --wells A1 B1 C1 --fs-override 12500
 
 # Analyse only a time window
-mea-flow run recording.spk --time-start 300 --time-end 600 --out results/ --fs-override 12500
+mea-span run recording.spk --time-start 300 --time-end 600 --out results/ --fs-override 12500
 ```
 
 ---
@@ -237,7 +237,7 @@ mea-flow run recording.spk --time-start 300 --time-end 600 --out results/ --fs-o
 For programmatic use:
 
 ```python
-from py_mea_flow import MEAExperiment
+from py_mea_span import MEAExperiment
 
 exp = MEAExperiment(
     "recording.spk",
@@ -255,10 +255,10 @@ exp.plot_raster("A1")
 exp.plot_trajectory("mean_mfr_active_hz")
 ```
 
-The `py_mea_flow.stats` module exposes the same statistical functions used by the CLI:
+The `py_mea_span.stats` module exposes the same statistical functions used by the CLI:
 
 ```python
-from py_mea_flow.stats import (
+from py_mea_span.stats import (
     pairwise_test,            # unified dispatcher: tukey / mannwhitney / kruskal
     tukey_hsd_pairwise,       # Tukey HSD only
     compare_conditions,       # auto-dispatch MW (2 groups) or KW (3+ groups)
@@ -274,7 +274,7 @@ from py_mea_flow.stats import (
 Some recordings lack a `BlockVectorHeader` (firmware-dependent). When that happens, sampling-rate detection may guess wrong; pass `--fs-override` explicitly:
 
 ```bash
-mea-flow run recording.spk --fs-override 12500
+mea-span run recording.spk --fs-override 12500
 ```
 
 12500 Hz is the standard rate for 24-well plates.
@@ -294,7 +294,7 @@ pytest
 
 ## Citing
 
-If you use `py-mea-flow` in your research, please cite:
+If you use `py-mea-span` in your research, please cite:
 
 > [manuscript in preparation]
 

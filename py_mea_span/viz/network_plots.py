@@ -25,7 +25,7 @@ import pandas as pd
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
 
-from py_mea_flow.network.detection import NetworkBurst
+from py_mea_span.network.detection import NetworkBurst
 
 
 def plot_sttc_matrix(
@@ -44,7 +44,7 @@ def plot_sttc_matrix(
     ----------
     sttc_df : pd.DataFrame
         Square symmetric DataFrame returned by
-        :func:`~py_mea_flow.network.synchrony.sttc_matrix`.
+        :func:`~py_mea_span.network.synchrony.sttc_matrix`.
         Index and columns are electrode IDs.
     cmap : str, optional
         Matplotlib colour map.  Default ``'RdYlGn'`` (red–yellow–green),
@@ -129,7 +129,7 @@ def plot_network_burst_timeline(
     ----------
     network_bursts : list[NetworkBurst]
         Detected network bursts (from
-        :func:`~py_mea_flow.network.detection.detect_network_bursts`).
+        :func:`~py_mea_span.network.detection.detect_network_bursts`).
     total_time_s : float
         Total recording duration in seconds (sets the x-axis limit).
     bar_height : float, optional
@@ -151,7 +151,7 @@ def plot_network_burst_timeline(
 
     Examples
     --------
-    >>> from py_mea_flow.network.detection import NetworkBurst
+    >>> from py_mea_span.network.detection import NetworkBurst
     >>> nb = NetworkBurst(1.0, 2.0, 1.0, ["e1","e2"], 0.5, 0.8)
     >>> fig = plot_network_burst_timeline([nb], total_time_s=10.0)
     >>> len(fig.axes)

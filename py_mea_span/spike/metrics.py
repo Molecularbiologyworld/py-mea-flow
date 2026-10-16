@@ -217,7 +217,7 @@ def summarise_well(
     well_spike_dict : dict[str, np.ndarray]
         Mapping from electrode ID (e.g. ``'A1_11'``) to a sorted 1-D
         array of spike timestamps in seconds, as returned by
-        :func:`~py_mea_flow.io.spk_reader.load_spikes_from_spk`.
+        :func:`~py_mea_span.io.spk_reader.load_spikes_from_spk`.
     duration_s : float
         Total recording duration in seconds.
     well_id : str

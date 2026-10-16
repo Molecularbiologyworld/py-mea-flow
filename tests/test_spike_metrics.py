@@ -1,14 +1,14 @@
 """
 tests/test_spike_metrics.py
 ===========================
-Tests for py_mea_flow.spike.metrics.
+Tests for py_mea_span.spike.metrics.
 """
 
 import numpy as np
 import pandas as pd
 import pytest
 
-from py_mea_flow.spike.metrics import (
+from py_mea_span.spike.metrics import (
     electrode_metrics,
     is_active,
     isi_array,
@@ -253,7 +253,7 @@ class TestRealDataSmoke:
         if not Path(spk_path).exists():
             pytest.skip("Real .spk file not available in this environment")
 
-        from py_mea_flow.io.spk_reader import load_spikes_from_spk
+        from py_mea_span.io.spk_reader import load_spikes_from_spk
         result, total = load_spikes_from_spk(Path(spk_path), wells=["A1"])
         well_dict = {eid: ts for eid, ts in result.items()
                      if eid.startswith("A1")}

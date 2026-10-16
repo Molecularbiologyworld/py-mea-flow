@@ -1,7 +1,7 @@
 """
 tests/test_network_detection.py
 ================================
-Tests for py_mea_flow.network.detection.
+Tests for py_mea_span.network.detection.
 
 Spike trains are constructed so that the network burst structure is
 known exactly, allowing the tests to verify the algorithm precisely.
@@ -28,8 +28,8 @@ STAGGERED
 import numpy as np
 import pytest
 
-from py_mea_flow.burst.detection import Burst, detect_bursts
-from py_mea_flow.network.detection import NetworkBurst, detect_network_bursts
+from py_mea_span.burst.detection import Burst, detect_bursts
+from py_mea_span.network.detection import NetworkBurst, detect_network_bursts
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -274,8 +274,8 @@ class TestRealDataSmoke:
         if not spk.exists():
             pytest.skip("Real .spk file not available")
 
-        from py_mea_flow.burst.detection import detect_bursts
-        from py_mea_flow.io.spk_reader import load_spikes_from_spk
+        from py_mea_span.burst.detection import detect_bursts
+        from py_mea_span.io.spk_reader import load_spikes_from_spk
 
         result, total = load_spikes_from_spk(spk, wells=["A1"])
         well_bursts = {

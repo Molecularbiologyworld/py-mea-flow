@@ -2,12 +2,12 @@
 tests/test_viz.py
 ==================
 Tests for the six viz modules:
-  - py_mea_flow.viz.heatmap
-  - py_mea_flow.viz.burst_charts
-  - py_mea_flow.viz.trajectory
-  - py_mea_flow.viz.network_plots
-  - py_mea_flow.viz.comparison
-  - py_mea_flow.viz.pca
+  - py_mea_span.viz.heatmap
+  - py_mea_span.viz.burst_charts
+  - py_mea_span.viz.trajectory
+  - py_mea_span.viz.network_plots
+  - py_mea_span.viz.comparison
+  - py_mea_span.viz.pca
 
 All tests use the Agg backend (headless) and only check figure/axes
 properties — no pixel-level rendering is required.
@@ -23,20 +23,20 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 
-from py_mea_flow.burst.detection import Burst
-from py_mea_flow.network.detection import NetworkBurst
-from py_mea_flow.viz.heatmap import plot_electrode_heatmap, _parse_electrode_rc
-from py_mea_flow.viz.burst_charts import plot_isi_histogram, plot_burst_raster
-from py_mea_flow.viz.trajectory import plot_metric_trajectory
-from py_mea_flow.viz.network_plots import plot_sttc_matrix, plot_network_burst_timeline
-from py_mea_flow.viz.comparison import plot_condition_violin
-from py_mea_flow.viz.pca import (
+from py_mea_span.burst.detection import Burst
+from py_mea_span.network.detection import NetworkBurst
+from py_mea_span.viz.heatmap import plot_electrode_heatmap, _parse_electrode_rc
+from py_mea_span.viz.burst_charts import plot_isi_histogram, plot_burst_raster
+from py_mea_span.viz.trajectory import plot_metric_trajectory
+from py_mea_span.viz.network_plots import plot_sttc_matrix, plot_network_burst_timeline
+from py_mea_span.viz.comparison import plot_condition_violin
+from py_mea_span.viz.pca import (
     compute_pca,
     compute_pca_loadings,
     plot_pca,
     plot_pca_loadings,
 )
-from py_mea_flow.viz.plate import plot_plate_heatmap
+from py_mea_span.viz.plate import plot_plate_heatmap
 
 
 # ── Fixtures ──────────────────────────────────────────────────────────────────

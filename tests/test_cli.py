@@ -1,7 +1,7 @@
 """
 tests/test_cli.py
 ==================
-Tests for py_mea_flow.cli.
+Tests for py_mea_span.cli.
 
 Tests are split into:
   - Parser tests: verify argparse accepts/rejects the right arguments.
@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from py_mea_flow.cli import (
+from py_mea_span.cli import (
     _apply_inline_plate_map,
     _build_layout_from_wells,
     _cmd_run,
@@ -34,7 +34,7 @@ from py_mea_flow.cli import (
     build_parser,
     main,
 )
-from py_mea_flow.pipeline import MEAExperiment
+from py_mea_span.pipeline import MEAExperiment
 
 
 # ── Fixtures ──────────────────────────────────────────────────────────────────
@@ -266,7 +266,7 @@ class TestCmdRun:
         ).run().well_summary
         mock_exp.run.return_value = mock_exp
 
-        with patch("py_mea_flow.cli.MEAExperiment", return_value=mock_exp):
+        with patch("py_mea_span.cli.MEAExperiment", return_value=mock_exp):
             args = self._make_args(fake_spk, out)
             rc = _cmd_run(args)
 
@@ -293,7 +293,7 @@ class TestCmdRun:
             out=None,                  # <-- default: derive from spk_file
             max_isi=0.1, min_spikes=5, sttc_dt=0.05, no_figures=True,
         )
-        with patch("py_mea_flow.cli.MEAExperiment", return_value=mock_exp):
+        with patch("py_mea_span.cli.MEAExperiment", return_value=mock_exp):
             rc = _cmd_run(args)
 
         assert rc == 0
@@ -309,7 +309,7 @@ class TestCmdRun:
         mock_exp.well_summary = pd.DataFrame(columns=["well_id"])
         mock_exp.run.return_value = mock_exp
 
-        with patch("py_mea_flow.cli.MEAExperiment", return_value=mock_exp):
+        with patch("py_mea_span.cli.MEAExperiment", return_value=mock_exp):
             args = self._make_args(fake_spk, out, no_figures=True)
             _cmd_run(args)
 
@@ -350,7 +350,7 @@ class TestCmdSummary:
             time_start=None, time_end=None,
         )
 
-        with patch("py_mea_flow.cli.MEAExperiment", return_value=mock_exp):
+        with patch("py_mea_span.cli.MEAExperiment", return_value=mock_exp):
             rc = _cmd_summary(args)
 
         assert rc == 0
@@ -384,7 +384,7 @@ class TestMain:
         mock_exp.well_summary = pd.DataFrame(columns=["well_id"])
         mock_exp.run.return_value = mock_exp
 
-        with patch("py_mea_flow.cli.MEAExperiment", return_value=mock_exp):
+        with patch("py_mea_span.cli.MEAExperiment", return_value=mock_exp):
             rc = main([
                 "run", str(fake_spk),
                 "--out", str(out),
@@ -407,7 +407,7 @@ class TestMain:
         })
         mock_exp.run.return_value = mock_exp
 
-        with patch("py_mea_flow.cli.MEAExperiment", return_value=mock_exp):
+        with patch("py_mea_span.cli.MEAExperiment", return_value=mock_exp):
             rc = main(["summary", str(fake_spk)])
         assert rc == 0
 

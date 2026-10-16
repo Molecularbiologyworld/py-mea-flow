@@ -21,7 +21,7 @@ import numpy as np
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
 
-from py_mea_flow.io.spk_reader import ELECTRODES_PER_ROW, ELECTRODES_PER_COL
+from py_mea_span.io.spk_reader import ELECTRODES_PER_ROW, ELECTRODES_PER_COL
 
 
 def plot_electrode_heatmap(
