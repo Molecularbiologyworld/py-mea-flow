@@ -1,7 +1,7 @@
 # py-mea-span
 
-[![PyPI version](https://img.shields.io/pypi/v/py-mea-span?label=PyPI)](https://pypi.org/project/py-mea-span/)
-[![Python](https://img.shields.io/pypi/pyversions/py-mea-span?label=Python)](https://pypi.org/project/py-mea-span/)
+[![PyPI version](https://img.shields.io/pypi/v/py-mea-span?label=PyPI&cacheSeconds=3600)](https://pypi.org/project/py-mea-span/)
+[![Python](https://img.shields.io/pypi/pyversions/py-mea-span?label=Python&cacheSeconds=3600)](https://pypi.org/project/py-mea-span/)
 [![GitHub](https://img.shields.io/badge/GitHub-py--mea--span-blue?logo=github)](https://github.com/Molecularbiologyworld/py-mea-span)
 
 Welcome to our MEA Python package!
